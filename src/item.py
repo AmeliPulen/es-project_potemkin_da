@@ -1,4 +1,5 @@
 import csv
+import pathlib
 
 
 class Item:
@@ -63,7 +64,7 @@ class Item:
         Берет перечень объектов из файла CSV и делает из них экземпляры класс Item
         """
         cls.all = []
-        with (open('/Users/guynotgay/PycharmProjects/es-project_potemkin_da/src/items.csv', "r", encoding='Windows-1251') as csvfile):
+        with (open('../src/items.csv', "r", encoding='Windows-1251') as csvfile):
             reader = csv.DictReader(csvfile)
             for row in reader:
                 cls(row['name'], row['price'], row['quantity'])
