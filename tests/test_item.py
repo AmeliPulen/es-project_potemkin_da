@@ -38,3 +38,9 @@ assert len(Item.all) == 5
 assert Item.string_to_number('6') == 6
 assert Item.string_to_number('6.0') == 6
 assert Item.string_to_number('6.5') == 6
+
+# Проверить правильность вызова магического метода __repr__
+assert repr(item1) == "Item('VibroDildo', 2500.0, 3)"
+
+# Проверить правильность вызова магического метода __str__
+assert str(item1) == 'VibroDildo'
