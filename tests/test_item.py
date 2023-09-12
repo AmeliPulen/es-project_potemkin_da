@@ -20,3 +20,21 @@ item2.apply_discount()
 
 assert item1.price == 2500
 assert item2.price == 10000
+
+
+# Проверить заприватился ли атрибут
+item1.name = 'VibroDildo'
+assert item1.name == 'VibroDildo'
+
+# Проверить уменьшилась ли длина названия
+item2.name = 'Sex Doll Ann'
+assert item2.name == 'Sex Doll A'
+
+# Проверить количество экземпляров класса созданных из csv файла
+Item.instantiate_from_csv()
+assert len(Item.all) == 5
+
+# Проверить различные типы данных в методе string_to_number
+assert Item.string_to_number('6') == 6
+assert Item.string_to_number('6.0') == 6
+assert Item.string_to_number('6.5') == 6
