@@ -1,6 +1,8 @@
 import csv
 import pathlib
 
+class InstantiateCSVError(Exception):
+    pass
 
 class Item:
     """
@@ -75,11 +77,18 @@ class Item:
         """
         Берет перечень объектов из файла CSV и делает из них экземпляры класс Item
         """
-        cls.all = []
-        with (open('../src/items.csv', "r", encoding='Windows-1251') as csvfile):
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+        try:
+            cls.all = []
+            with open('../src/items.csv', "r", encoding='Windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for line in reader:
+                    item1 = (cls(line['name'], line['price'], line['quantity']))
+                    cls.all.append(item1)
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
+        except FileNotFoundError:
+            return f"Отсутствует файл item.csv"
+
 
     @staticmethod
     def string_to_number(text: str) -> int:

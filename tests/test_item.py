@@ -1,5 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+import csv
+
 from src.item import Item
 
 
@@ -48,3 +50,24 @@ def test_repr():
 def test_str():
     # Проверить правильность вызова магического метода __str__
     assert str(item) == 'VibroDildo'
+
+# def test_instantiate_from_csv():
+#     with pytest.raises(InstantiateCSVError):
+#         Item.instantiate_from_csv()
+#
+# def test_instantiate_from_csv1():
+#     with pytest.raises(FileNotFoundError):
+#         Item.instantiate_from_csv()
+
+def test_instantiate_from_csv():
+    with open('items.csv') as file:
+        read = csv.DictReader(file)
+        assert read is not None
+        for x in read:
+            assert "name" in x
+            assert "price" in x
+            assert "quantity" in x
+
+def test_instantiate_from_csv_file_not():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('lbklj.csv')
